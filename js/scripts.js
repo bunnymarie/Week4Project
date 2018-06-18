@@ -3,11 +3,12 @@ $(document).ready(function() {
   $("form#orderForm").submit(function(event) {
     event.preventDefault();
 
-    function order(sidesOrderedReduced, beveragesOrderedReduced, dessertsOrderedReduced, pizzaReduced){
+    function order(sidesOrderedReduced, pizzaSauceReduced, beveragesOrderedReduced, dessertsOrderedReduced, pizzaToppingsReduced){
       this.sidesOrderedReduced = sidesOrderedReduced;
       this.beveragesOrderedReduced = beveragesOrderedReduced;
       this.dessertsOrderedReduced = dessertsOrderedReduced;
-      this.pizzaReduced = pizzaReduced;
+      this.pizzaSauceReduced = pizzaSauceReduced;
+      this.pizzaToppingsReduced = pizzaToppingsReduced;
     }
 
     var sidesListed = [];
@@ -23,17 +24,19 @@ $(document).ready(function() {
     var dessertsOrderedReduced;
     dessertsOrderedReduced = dessertsOrderedReduced || 0
 
-    var pizza = 10;
-    var pizzaSauce = parseInt($("input:radio[name=pizzaSauce]:checked").val());
+    var pizzaSauceListed = [];
+    var pizzaSauce = [];
+    var pizzaSauceReduced = [];
+    pizzaSauceReduced = pizzaSauceReduced || 0
     var pizzaToppingsListed = [];
     var pizzaToppingsOrdered = [];
-    var pizzaReduced;
-    pizzaReduced = pizzaReduced || 0
+    var pizzaToppingsReduced;
+    pizzaToppingsReduced = pizzaToppingsReduced || 0
     var total;
 
-    var newOrder = new order(sidesOrderedReduced, beveragesOrderedReduced, dessertsOrderedReduced, pizzaReduced, total);
+    var newOrder = new order(sidesOrderedReduced, beveragesOrderedReduced, dessertsOrderedReduced, pizzaSauceReduced, pizzaToppingsReduced, total);
     order.prototype.total = function(){
-      return beveragesOrderedReduced+sidesOrderedReduced+dessertsOrderedReduced+pizza+pizzaReduced;
+      return beveragesOrderedReduced+sidesOrderedReduced+dessertsOrderedReduced+pizzaSauceReduced+pizzaToppingsReduced;
     }
 
       $("input:checkbox[value=sides]:checked").each(function(){
@@ -43,11 +46,18 @@ $(document).ready(function() {
         return sidesOrderedReduced;
       });
 
+      $("input:checkbox[value=pizzaSauce]:checked").each(function(){
+        pizzaSauceListed.push($(this).attr("id"));
+        pizzaSauce.push(10);
+        pizzaSauceReduced =  pizzaSauce.reduceRight(function(a,b){return a+b;});
+        return pizzaSauceReduced;
+      });
+
       $("input:checkbox[value=pizzaToppings]:checked").each(function(){
         pizzaToppingsListed.push($(this).attr("id"));
         pizzaToppingsOrdered.push(1);
-        pizzaReduced = pizzaToppingsOrdered.reduceRight(function(a,b){return a+b;});
-        return pizzaReduced;
+        pizzaToppingsReduced = pizzaToppingsOrdered.reduceRight(function(a,b){return a+b;});
+        return pizzaToppingsReduced;
       });
 
       $("input:checkbox[value=beverages]:checked").each(function(){
@@ -69,6 +79,7 @@ $(document).ready(function() {
          $(".orderInfo").last().click(function(){
            $("#show-info").show();
            $(".sides").text(sidesListed);
+           $(".pizzaSauce").text(pizzaSauceListed);
            $(".pizzaToppings").text(pizzaToppingsListed);
            $(".beverages").text(beveragesListed);
            $(".desserts").text(dessertsListed);
