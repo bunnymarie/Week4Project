@@ -1,0 +1,16 @@
+body  {
+  background-color: lightcyan;
+}
+
+#show-info {
+  display: none;
+}
+
+.orderInfo {
+  cursor: pointer;
+  color: #0088cc;
+}
+
+.orderInfo:hover {
+  text-decoration: underline;
+}

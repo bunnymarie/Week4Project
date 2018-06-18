@@ -1,69 +1,80 @@
 <!DOCTYPE hmtl>
 <html>
   <head>
-    <title>
-    </title>
+    <meta charset="utf-8">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/scripts.js"></script>
+    <title>Piza</title>
   </head>
   <body>
-
+  <form id="orderForm">
     SIDES: Don't forget a handcrafted homemade appetizer! Why not make your pizza a meal!
 
     5pc Wings:
-      Barbecue (6$)
-      Buffalo (7$)
-      Honey Mustard (6$)
-      Plain (5$)
+      <input type="checkbox" value="sides">Barbecue (5$)<br>
+      <input type="checkbox" value="sides">Buffalo (5$)<br>
+      <input type="checkbox" value="sides">Honey Mustard (5$)<br>
+      <input type="checkbox" value="sides">Plain (5$)<br>
 
     Salad:
-      Caesar (7$)
-      House (5$)
+      <input type="checkbox" value="sides">Caesar (5$)<br>
+      <input type="checkbox" value="sides">House (5$)<br>
 
     Garlic Bread:
-      Regular (5$)
-      Cheese Stuffed (7$)
+      <input type="checkbox" value="sides"> Regular (5$)<br>
+      <input type="checkbox" value="sides">Cheese Stuffed (5$)<br>
 
 
-    PIZZA PIE: 10$ Every pizza includes our homemade crust and three layers of mozarella and provolone cheese.
+    PIZZA PIE: Every pizza includes our homemade crust and three layers of mozarella and provolone cheese.
 
     Sauce:
-      White sauce
-      Red sauce
-      Pesto (3$)
-      Barbecue (3$)
-      Ranch (3$)
+    <li><label><input type="radio" name="pizzaSauce" value="0">White sauce</label></li>
+    <li><label><input type="radio" name="pizzaSauce" value="0">Red sauce</label></li>
+    <li><label><input type="radio" name="pizzaSauce" value="3">Pesto (3$)</label></li>
+    <li><label><input type="radio" name="pizzaSauce" value="3">Barbecue (3$)</label></li>
+    <li><label><input type="radio" name="pizzaSauce" value="3">Ranch (3$)</label></li>
 
     Toppings:
-      Pepperoni (1$)
-      Anchovies (1$)
-      Tomatoes (.50$)
-      Spinach (.50$)
-      Chicken (2$)
-      Bacon (1$)
-      Canadian Bacon (1$)
-      Red Onions (.50$)
-      Mushrooms (.50$)
-      Olives (.50$)
+      <input type="checkbox" value="pizzaToppings">Pepperoni (1$)<br>
+      <input type="checkbox" value="pizzaToppings">Anchovies (1$)<br>
+      <input type="checkbox" value="pizzaToppings">Tomatoes (1$)<br>
+      <input type="checkbox" value="pizzaToppings">Spinach (1$)<br>
+      <input type="checkbox" value="pizzaToppings">Chicken (1$)<br>
+      <input type="checkbox" value="pizzaToppings">Bacon (1$)<br>
+      <input type="checkbox" value="pizzaToppings">Canadian Bacon (1$)<br>
+      <input type="checkbox" value="pizzaToppings">Red Onions (1$)<br>
+      <input type="checkbox" value="pizzaToppings">Mushrooms (1$)<br>
+      <input type="checkbox" value="pizzaToppings">Olives (1$)<br>
 
     BEVERAGES: We offer a range of Pepsi-Cola products and specialty drinks.
     Soda-pop:
-        Pepsi (3$)
-        Mountain Dew (3$)
-        Mug Root Beer (3$)
-        Mug Cream Soda (3$)
-        Sierra Mist (3$)
-        Lipton Iced Tea (3$)
-        Tropicana (3$)
-        SoBe (3$)
+        <input type="checkbox" value="beverages">Pepsi (3$)<br>
+        <input type="checkbox" value="beverages">Mountain Dew (3$)<br>
+        <input type="checkbox" value="beverages">Mug Root Beer (3$)<br>
+        <input type="checkbox" value="beverages">Mug Cream Soda (3$)<br>
+        <input type="checkbox" value="beverages">Sierra Mist (3$)<br>
+        <input type="checkbox" value="beverages">Lipton Iced Tea (3$)<br>
+        <input type="checkbox" value="beverages">Tropicana (3$)<br>
+        <input type="checkbox" value="beverages">SoBe (3$)<br>
 
       San Pellegrino:
-        Plain Sparkling Water (bottled) (5$)
-        Limonata (canned) (3$)
-        Aranciata (canned) (3$)
-        Aranciata Rossa (canned) (3$)
+        <input type="checkbox" value="beverages">Plain Sparkling Water (bottled) (3$)<br>
+        <input type="checkbox" value="beverages">Limonata (canned) (3$)<br>
+        <input type="checkbox" value="beverages">Aranciata (canned) (3$)<br>
+        <input type="checkbox" value="beverages">Aranciata Rossa (canned) (3$)<br>
 
       DESSERTS: Make it romantic! Something sweet is always the way to make a moment better! Homemade, home-baked, with love in every bite.
-        Tiramisu (5$)
-        New York Cheese Cake (5$)
-        Chocolate Layered Cake (5$)
+        <input type="checkbox" value="desserts" id=" Tiramisu (5$)">Tiramisu (5$)<br>
+        <input type="checkbox" value="desserts" id=" New York Cheesecake (5$)">New York Cheesecake (5$)<br>
+        <input type="checkbox" value="desserts" id=" Chocolate Layered Cake (5$)">Chocolate Layered Cake (5$)<br>
+        <ul id="orders">
+        </ul>
+          <div id="show-info">
+          <p><span class="total"></span><span class="desserts"></span>
+          </div>
+          <button type="submit" class="btn btn-success">Add</button>
+    </form>
   </body>
 </html>
