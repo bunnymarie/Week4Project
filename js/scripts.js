@@ -3,12 +3,16 @@ $(document).ready(function() {
   $("form#orderForm").submit(function(event) {
     event.preventDefault();
 
-    function order(sidesOrderedReduced, pizzaSauceReduced, beveragesOrderedReduced, dessertsOrderedReduced, pizzaToppingsReduced){
+    function order(sidesOrderedReduced, pizzaSauceReduced, beveragesOrderedReduced, dessertsOrderedReduced, pizzaToppingsReduced, zipcodeAddress, cityAddress, streetAddress, total){
       this.sidesOrderedReduced = sidesOrderedReduced;
       this.beveragesOrderedReduced = beveragesOrderedReduced;
       this.dessertsOrderedReduced = dessertsOrderedReduced;
       this.pizzaSauceReduced = pizzaSauceReduced;
       this.pizzaToppingsReduced = pizzaToppingsReduced;
+      this.zipcodeAddress = zipcodeAddress;
+      this.cityAddress = cityAddress;
+      this.streetAddress = streetAddress;
+      this.total = total;
     }
 
     var sidesListed = [];
@@ -32,9 +36,14 @@ $(document).ready(function() {
     var pizzaToppingsOrdered = [];
     var pizzaToppingsReduced;
     pizzaToppingsReduced = pizzaToppingsReduced || 0
+
     var total;
 
-    var newOrder = new order(sidesOrderedReduced, beveragesOrderedReduced, dessertsOrderedReduced, pizzaSauceReduced, pizzaToppingsReduced, total);
+    var zipcodeAddress = $("input#zipcodeAddress").val();
+    var cityAddress = $("input#cityAddress").val();
+    var streetAddress = $("input#streetAddress").val();
+
+    var newOrder = new order(sidesOrderedReduced, beveragesOrderedReduced, dessertsOrderedReduced, pizzaSauceReduced, pizzaToppingsReduced, zipcodeAddress, cityAddress, streetAddress, total);
     order.prototype.total = function(){
       return beveragesOrderedReduced+sidesOrderedReduced+dessertsOrderedReduced+pizzaSauceReduced+pizzaToppingsReduced;
     }
@@ -75,7 +84,7 @@ $(document).ready(function() {
       });
 
       $("ul#orders").append(
-           "<li><span class='orderInfo'>Order1</span></li>");
+           "<li><span class='orderInfo'>Order</span></li>");
          $(".orderInfo").last().click(function(){
            $("#show-info").show();
            $(".sides").text(sidesListed);
@@ -83,8 +92,14 @@ $(document).ready(function() {
            $(".pizzaToppings").text(pizzaToppingsListed);
            $(".beverages").text(beveragesListed);
            $(".desserts").text(dessertsListed);
+           $(".zipcodeAddress").text(newOrder.zipcodeAddress);
+           $(".streetAddress").text(newOrder.streetAddress);
+           $(".cityAddress").text(newOrder.cityAddress);
            $(".total").text(newOrder.total);
          });
-
+      $('input:checkbox').removeAttr('checked');
+      $("input#zipcodeAddress").val("");
+      $("input#cityAddress").val("");
+      $("input#streetAddress").val("");
     });
 });
