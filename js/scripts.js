@@ -1,19 +1,20 @@
+function order(sidesOrderedReduced, pizzaSauceReduced, beveragesOrderedReduced, dessertsOrderedReduced, pizzaToppingsReduced, zipcodeAddress, cityAddress, streetAddress, total){
+  this.sidesOrderedReduced = sidesOrderedReduced;
+  this.beveragesOrderedReduced = beveragesOrderedReduced;
+  this.dessertsOrderedReduced = dessertsOrderedReduced;
+  this.pizzaSauceReduced = pizzaSauceReduced;
+  this.pizzaToppingsReduced = pizzaToppingsReduced;
+  this.zipcodeAddress = zipcodeAddress;
+  this.cityAddress = cityAddress;
+  this.streetAddress = streetAddress;
+  this.total = total;
+}
 
 $(document).ready(function() {
   $("form#orderForm").submit(function(event) {
     event.preventDefault();
 
-    function order(sidesOrderedReduced, pizzaSauceReduced, beveragesOrderedReduced, dessertsOrderedReduced, pizzaToppingsReduced, zipcodeAddress, cityAddress, streetAddress, total){
-      this.sidesOrderedReduced = sidesOrderedReduced;
-      this.beveragesOrderedReduced = beveragesOrderedReduced;
-      this.dessertsOrderedReduced = dessertsOrderedReduced;
-      this.pizzaSauceReduced = pizzaSauceReduced;
-      this.pizzaToppingsReduced = pizzaToppingsReduced;
-      this.zipcodeAddress = zipcodeAddress;
-      this.cityAddress = cityAddress;
-      this.streetAddress = streetAddress;
-      this.total = total;
-    }
+    debugger;
 
     var sidesListed = [];
     var sidesOrdered = [];
@@ -23,6 +24,7 @@ $(document).ready(function() {
     var beveragesOrdered = [];
     var beveragesOrderedReduced;
     beveragesOrderedReduced = beveragesOrderedReduced || 0
+
     var dessertsListed = [];
     var dessertsOrdered = [];
     var dessertsOrderedReduced;
@@ -30,8 +32,9 @@ $(document).ready(function() {
 
     var pizzaSauceListed = [];
     var pizzaSauce = [];
-    var pizzaSauceReduced = [];
+    var pizzaSauceReduced;
     pizzaSauceReduced = pizzaSauceReduced || 0
+
     var pizzaToppingsListed = [];
     var pizzaToppingsOrdered = [];
     var pizzaToppingsReduced;
@@ -39,14 +42,15 @@ $(document).ready(function() {
 
     var total;
 
+    order.prototype.total = function(){
+      return this.sidesOrderedReduced+this.beveragesOrderedReduced+this.dessertsOrderedReduced+this.pizzaSauceReduced+this.pizzaToppingsReduced;
+    };
+
     var zipcodeAddress = $("input#zipcodeAddress").val();
     var cityAddress = $("input#cityAddress").val();
     var streetAddress = $("input#streetAddress").val();
 
     var newOrder = new order(sidesOrderedReduced, beveragesOrderedReduced, dessertsOrderedReduced, pizzaSauceReduced, pizzaToppingsReduced, zipcodeAddress, cityAddress, streetAddress, total);
-    order.prototype.total = function(){
-      return beveragesOrderedReduced+sidesOrderedReduced+dessertsOrderedReduced+pizzaSauceReduced+pizzaToppingsReduced;
-    }
 
       $("input:checkbox[value=sides]:checked").each(function(){
         sidesListed.push($(this).attr("id"));
@@ -57,7 +61,7 @@ $(document).ready(function() {
 
       $("input:checkbox[value=pizzaSauce]:checked").each(function(){
         pizzaSauceListed.push($(this).attr("id"));
-        pizzaSauce.push(10);
+        pizzaSauce.push(9);
         pizzaSauceReduced =  pizzaSauce.reduceRight(function(a,b){return a+b;});
         return pizzaSauceReduced;
       });
@@ -83,6 +87,8 @@ $(document).ready(function() {
         return dessertsOrderedReduced;
       });
 
+      var total = sidesOrderedReduced+beveragesOrderedReduced+dessertsOrderedReduced+pizzaSauceReduced+pizzaToppingsReduced;
+
       $("ul#orders").append(
            "<li><span class='orderInfo'>Order</span></li>");
          $(".orderInfo").last().click(function(){
@@ -95,9 +101,8 @@ $(document).ready(function() {
            $(".zipcodeAddress").text(newOrder.zipcodeAddress);
            $(".streetAddress").text(newOrder.streetAddress);
            $(".cityAddress").text(newOrder.cityAddress);
-           $(".total").text(newOrder.total);
+           $(".total").text(total);
          });
-      $('input:checkbox').removeAttr('checked');
       $("input#zipcodeAddress").val("");
       $("input#cityAddress").val("");
       $("input#streetAddress").val("");
